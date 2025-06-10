@@ -7,14 +7,13 @@ if (!URI) {
     throw new Error("Please define the NEXT_PUBLIC_MONGODB_URI environment variable inside .env.local");
 }
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
+const client: MongoClient = new MongoClient(URI, options);
+const clientPromise: Promise<MongoClient> = client.connect()
 
+/* eslint-disable no-var */
 declare global {
     var _mongoClientPromise: Promise<MongoClient>;
 }
-
-client = new MongoClient(URI, options);
-clientPromise = client.connect();
+/* eslint-enable no-var */
 
 export default clientPromise;

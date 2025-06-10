@@ -3,11 +3,9 @@ import Link from "next/link";
 const MobileMenu = ({
     open,
     children,
-    onClose,
 }: {
     open: boolean;
     children: React.ReactNode;
-    onClose: () => void;
 }) => (
     <div
         className={`absolute top-16 left-0 right-0 bg-white shadow-lg z-40 transition-all overflow-hidden ${open ? "max-h-screen opacity-100" : "max-h-0 opacity-0 pointer-events-none"

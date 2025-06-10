@@ -13,7 +13,7 @@ import { useAuth } from "@/context/useAuth";
 const Navbar: NextPage = () => {
     const [filterOpen, setFilterOpen] = useState<boolean>(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const { Auth, setAuth } = useAuth();
+    const { setAuth } = useAuth();
 
     const toggleFilter = () => setFilterOpen(!filterOpen);
     const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -106,7 +106,7 @@ const Navbar: NextPage = () => {
                 </div>
             </button>
 
-            <MobileMenu open={mobileMenuOpen} onClose={closeMobileMenu}>
+            <MobileMenu open={mobileMenuOpen}>
                 <div className="space-y-4 py-4">
                     {navLinks.map((link) => (
                         <MobileNavLink key={link.href} href={link.href} onClick={closeMobileMenu}>

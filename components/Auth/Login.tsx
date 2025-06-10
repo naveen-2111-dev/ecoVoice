@@ -1,7 +1,6 @@
 "use client";
 
 import { useAuth } from "@/context/useAuth";
-import { X } from "lucide-react";
 import React, { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
@@ -38,8 +37,8 @@ const Login = () => {
       } else {
         toast.error("Login failed");
       }
-    } catch (err: any) {
-      toast.error(err?.response?.data?.message || "Login failed");
+    } catch {
+      toast.error("Login failed");
     }
   };
 

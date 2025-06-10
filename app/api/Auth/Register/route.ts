@@ -38,9 +38,9 @@ export async function POST(req: Request) {
             }),
             { status: 201 }
         );
-    } catch (error: any) {
-        if (error.errors) {
-            return new Response(JSON.stringify({ errors: error.errors }), {
+    } catch (error) {
+        if (error) {
+            return new Response(JSON.stringify({ errors: error }), {
                 status: 400,
             });
         }

@@ -60,11 +60,11 @@ export async function POST(req: Request) {
             }),
             { status: 200 }
         );
-    } catch (error: any) {
+    } catch (error) {
         console.error("Login error:", error);
         return new Response(
             JSON.stringify({
-                error: error?.message || "Internal server error",
+                error: error || "Internal server error",
             }),
             { status: 500 }
         );
