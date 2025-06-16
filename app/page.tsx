@@ -1,26 +1,24 @@
-"use client"
+"use client";
 
 import { Login, Navbar, Register } from "@/components";
-import {  useAuth } from "@/context/useAuth";
+import { useAuth } from "@/context/useAuth";
+import Posts from "./Posts/page";
 
 const HomeContent = () => {
-  const { Auth } = useAuth();
+  const { auth } = useAuth();
 
-  console.log("HomeContent - Current Auth state:", Auth);
+  console.log("HomeContent - Current Auth state:", auth);
 
   return (
     <div>
       <Navbar />
-      <div>
-        {Auth.AuthState && Auth.AuthType === "reg" && (
-          <Register />
-        )}
-        {Auth.AuthState && Auth.AuthType === "log" && (
-          <Login />
-        )}
+      <div className="pt-20">
+        {auth.AuthState && auth.AuthType === "reg" && <Register />}
+        {auth.AuthState && auth.AuthType === "log" && <Login />}
       </div>
+      <Posts />
     </div>
   );
-}
+};
 
 export default HomeContent;
