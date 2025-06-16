@@ -8,7 +8,7 @@ import Image from "next/image";
 import useAuthHandler from "@/hooks/auth";
 
 const Login = () => {
-  const { Auth, setAuth } = useAuth();
+  const { auth, setAuth } = useAuth();
   const { handleLogin } = useAuthHandler();
 
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleClose = () => {
     setAuth({
-      ...Auth,
+      ...auth,
       AuthState: false,
     });
   };
@@ -35,8 +35,10 @@ const Login = () => {
       if (res.status >= 200 && res.status < 300) {
         toast.success("Registered successful");
         setAuth({
+          ...auth,
           AuthState: false,
           AuthType: "reg",
+          isAuthenticated: false,
         });
         handleLogin(email, password)
       } else {
