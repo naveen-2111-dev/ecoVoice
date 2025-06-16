@@ -34,7 +34,7 @@ export async function POST(req: Request) {
                     return new Response(JSON.stringify({ loggedIn: true, user: decoded }), {
                         status: 200,
                     });
-                } catch (err) {
+                } catch {
                     return new Response(JSON.stringify({ loggedIn: false }), {
                         status: 200,
                     });

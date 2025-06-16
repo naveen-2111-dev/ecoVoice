@@ -46,7 +46,7 @@ const LogoutButton = ({
             } else {
                 toast.error("Logout failed");
             }
-        } catch (err) {
+        } catch {
             toast.error("An error occurred while logging out");
         }
     };

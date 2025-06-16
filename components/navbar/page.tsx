@@ -3,7 +3,7 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ChevronRight, Funnel, UserPlus, Menu, X, LucideLogOut } from "lucide-react";
 import AuthButton from "./components/Authbutton";
 import { MobileMenu, MobileNavLink } from "./components/Mobilemenu";
