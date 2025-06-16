@@ -2,12 +2,12 @@
 
 import { useAuth } from "@/context/useAuth";
 import React, { useState } from "react";
-import toast from "react-hot-toast";
-import axios from "axios";
 import Image from "next/image";
+import useAuthHandler from "@/hooks/auth";
 
 const Login = () => {
   const { Auth, setAuth } = useAuth();
+  const { handleLogin } = useAuthHandler();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -19,29 +19,6 @@ const Login = () => {
     });
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    try {
-      const res = await axios.post("http://localhost:3000/api/Auth/Login", {
-        email,
-        password,
-      });
-
-      if (res.status === 200) {
-        toast.success("Login successful");
-        setAuth({
-          AuthState: false,
-          AuthType: "log",
-        });
-      } else {
-        toast.error("Login failed");
-      }
-    } catch {
-      toast.error("Login failed");
-    }
-  };
-
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50" onClick={handleClose}>
       <div
@@ -51,7 +28,7 @@ const Login = () => {
         <div className="flex justify-center items-center mb-4">
           <Image src="/logo.png" alt="logo" width={100} height={100} />
         </div>
-        <form className="space-y-4" onSubmit={handleLogin}>
+        <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleLogin(email, password) }}>
           <div>
             <input
               type="email"

@@ -3,17 +3,18 @@
 import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
-import { ChevronRight, Funnel, UserPlus, Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ChevronRight, Funnel, UserPlus, Menu, X, LucideLogOut } from "lucide-react";
 import AuthButton from "./components/Authbutton";
 import { MobileMenu, MobileNavLink } from "./components/Mobilemenu";
 import { FilterDropdown, NavLink } from "./components/FilterDropdown";
 import { useAuth } from "@/context/useAuth";
+import LogoutButton from "./components/LogoutButton";
 
 const Navbar: NextPage = () => {
     const [filterOpen, setFilterOpen] = useState<boolean>(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
-    const { setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const toggleFilter = () => setFilterOpen(!filterOpen);
     const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -21,9 +22,10 @@ const Navbar: NextPage = () => {
 
     const handleLoginClick = (type?: string) => {
         if (type === "reg") {
-            setAuth({ AuthState: true, AuthType: "reg" });
-        } else
-            setAuth({ AuthState: true, AuthType: "log" });
+            setAuth({ AuthState: true, AuthType: "reg", isAuthenticated: false });
+        } else {
+            setAuth({ AuthState: true, AuthType: "log", isAuthenticated: false });
+        }
     };
 
     const navLinks = [
@@ -73,20 +75,28 @@ const Navbar: NextPage = () => {
             </div>
 
             <div className="hidden md:flex gap-4">
-                <AuthButton
-                    variant="outline"
-                    icon={<UserPlus size={15} />}
-                    onClick={() => handleLoginClick("reg")}
-                >
-                    Register
-                </AuthButton>
-                <AuthButton
-                    variant="solid"
-                    icon={<ChevronRight size={15} />}
-                    onClick={() => handleLoginClick("log")}
-                >
-                    Login
-                </AuthButton>
+                {auth.isAuthenticated ? (
+                    <LogoutButton icon={<LucideLogOut />} variant="outline">
+                        Logout
+                    </LogoutButton>
+                ) : (
+                    <>
+                        <AuthButton
+                            variant="outline"
+                            icon={<UserPlus size={15} />}
+                            onClick={() => handleLoginClick("reg")}
+                        >
+                            Register
+                        </AuthButton>
+                        <AuthButton
+                            variant="solid"
+                            icon={<ChevronRight size={15} />}
+                            onClick={() => handleLoginClick("log")}
+                        >
+                            Login
+                        </AuthButton>
+                    </>
+                )}
             </div>
 
             <button
@@ -146,28 +156,28 @@ const Navbar: NextPage = () => {
                     </div>
 
                     <div className="pt-2 space-y-3">
-                        <AuthButton
-                            variant="outline"
-                            icon={<UserPlus size={15} />}
-                            onClick={() => {
-                                handleLoginClick("reg");
-                                closeMobileMenu();
-                            }}
-                            fullWidth
-                        >
-                            Register
-                        </AuthButton>
-                        <AuthButton
-                            variant="solid"
-                            icon={<ChevronRight size={15} />}
-                            onClick={() => {
-                                handleLoginClick("log");
-                                closeMobileMenu();
-                            }}
-                            fullWidth
-                        >
-                            Login
-                        </AuthButton>
+                        {auth.isAuthenticated ? (
+                            <LogoutButton icon={<LucideLogOut />} variant="outline">
+                                Logout
+                            </LogoutButton>
+                        ) : (
+                            <>
+                                <AuthButton
+                                    variant="outline"
+                                    icon={<UserPlus size={15} />}
+                                    onClick={() => handleLoginClick("reg")}
+                                >
+                                    Register
+                                </AuthButton>
+                                <AuthButton
+                                    variant="solid"
+                                    icon={<ChevronRight size={15} />}
+                                    onClick={() => handleLoginClick("log")}
+                                >
+                                    Login
+                                </AuthButton>
+                            </>
+                        )}
                     </div>
                 </div>
             </MobileMenu>
