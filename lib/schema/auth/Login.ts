@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { z } from "zod";
+import { number, z } from "zod";
+import { FollowerSchema, FollowersZodSchema } from "../post/utils/follower";
 
 new mongoose.Schema({
     email: {
@@ -23,6 +24,11 @@ new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    followerscount:{
+        type: Number,
+        default: 0
+    },
+    followers:[FollowerSchema]
 })
 
 export const LoginZodSchema = z.object({
@@ -38,4 +44,6 @@ export const LoginZodSchema = z.object({
     name: z.string().min(1).max(50).optional(),
     password: z.string().min(6),
     rememberMe: z.boolean().optional(),
+    followerscount: z.number().optional(),
+    followers: FollowersZodSchema.optional(),
 });
