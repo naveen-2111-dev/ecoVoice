@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tiptap/extension-code-block-lowlight": "^2.14.0",
     "@tiptap/extension-image": "^2.14.0",
     "@tiptap/extension-link": "^2.14.0",
     "@tiptap/extension-placeholder": "^2.14.0",
+    "@tiptap/extension-text-align": "^2.14.0",
+    "@tiptap/extension-underline": "^2.14.0",
+    "@tiptap/pm": "^2.14.0",
     "@tiptap/react": "^2.14.0",
     "@tiptap/starter-kit": "^2.14.0",
     "autoprefixer": "^10.4.21",
@@ -20,7 +24,9 @@
     "cookies": "^0.9.1",
     "dotenv": "^16.5.0",
     "jsonwebtoken": "^9.0.2",
+    "lowlight": "^3.3.0",
     "lucide-react": "^0.513.0",
+    "markdown-it": "^14.1.0",
     "mongodb": "^6.17.0",
     "mongoose": "^8.15.1",
     "next": "15.3.3",
@@ -29,6 +35,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.57.0",
     "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "zod": "^3.25.56",
     "zustand": "^5.0.5"
   },

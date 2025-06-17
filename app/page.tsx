@@ -2,7 +2,7 @@
 
 import { Login, Navbar, Register } from "@/components";
 import { useAuth } from "@/context/useAuth";
-import Posts from "./Posts/page";
+import Posts from "./(display-routes)/Posts/page";
 
 const HomeContent = () => {
   const { auth } = useAuth();

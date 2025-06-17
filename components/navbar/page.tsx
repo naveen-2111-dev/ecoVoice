@@ -4,12 +4,15 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronRight, Funnel, UserPlus, Menu, X, LucideLogOut } from "lucide-react";
+import { ChevronRight, Funnel, UserPlus, Menu, X, LucideLogOut, NotebookPen } from "lucide-react";
+import { VscSignOut } from "react-icons/vsc";
+import { IoIosNotificationsOutline } from "react-icons/io";
 import AuthButton from "./components/Authbutton";
 import { MobileMenu, MobileNavLink } from "./components/Mobilemenu";
 import { FilterDropdown, NavLink } from "./components/FilterDropdown";
 import { useAuth } from "@/context/useAuth";
 import LogoutButton from "./components/LogoutButton";
+import { useRouter } from "next/navigation";
 
 const Navbar: NextPage = () => {
     const [filterOpen, setFilterOpen] = useState<boolean>(false);
@@ -19,6 +22,7 @@ const Navbar: NextPage = () => {
     const toggleFilter = () => setFilterOpen(!filterOpen);
     const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
     const closeMobileMenu = () => setMobileMenuOpen(false);
+    const route = useRouter();
 
     const handleLoginClick = (type?: string) => {
         if (type === "reg") {
@@ -76,9 +80,17 @@ const Navbar: NextPage = () => {
 
             <div className="hidden md:flex gap-4">
                 {auth.isAuthenticated ? (
-                    <LogoutButton icon={<LucideLogOut />} variant="outline">
-                        Logout
-                    </LogoutButton>
+                    <div className="flex items-center gap-6">
+                        <div className="flex items-center gap-3">
+                            <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer" onClick={() => {
+                                route.push("/writeblog")
+                            }}>Write <NotebookPen size={18} /></button>
+                            <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer">Notification <IoIosNotificationsOutline size={18} /></button>
+                        </div>
+                        <LogoutButton icon={<VscSignOut size={18} />} variant="outline">
+                            Logout
+                        </LogoutButton>
+                    </div>
                 ) : (
                     <>
                         <AuthButton
@@ -157,9 +169,17 @@ const Navbar: NextPage = () => {
 
                     <div className="pt-2 space-y-3">
                         {auth.isAuthenticated ? (
-                            <LogoutButton icon={<LucideLogOut />} variant="outline">
-                                Logout
-                            </LogoutButton>
+                            <div className="flex items-center gap-6">
+                                <div className="flex items-center gap-3">
+                                    <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer" onClick={() => {
+                                        route.push("/writeblog")
+                                    }}>Write <NotebookPen size={18} /></button>
+                                    <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer">Notification <IoIosNotificationsOutline size={18} /></button>
+                                </div>
+                                <LogoutButton icon={<LucideLogOut />} variant="outline">
+                                    Logout
+                                </LogoutButton>
+                            </div>
                         ) : (
                             <>
                                 <AuthButton

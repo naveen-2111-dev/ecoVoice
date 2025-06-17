@@ -5,8 +5,9 @@
  */
 export const COLLECTIONS = {
     LOGIN: "login",
-    // POSTS: "posts",
-    // COMMENTS: "comments",
+    BLOG: "Blogpost",
+    COMMENTS: "comments",
+    FOLLOWERS:"followers"
 } as const;
 
 /**
