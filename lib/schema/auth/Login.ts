@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { number, z } from "zod";
+import { z } from "zod";
 import { FollowerSchema, FollowersZodSchema } from "../post/utils/follower";
 
 new mongoose.Schema({

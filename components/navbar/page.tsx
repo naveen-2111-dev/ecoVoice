@@ -83,7 +83,7 @@ const Navbar: NextPage = () => {
                     <div className="flex items-center gap-6">
                         <div className="flex items-center gap-3">
                             <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer" onClick={() => {
-                                auth.isAuthenticated && route.push("/writeblog")
+                                route.push("/writeblog")
                             }}>Write <NotebookPen size={18} /></button>
                             <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer">Notification <IoIosNotificationsOutline size={18} /></button>
                         </div>
@@ -172,7 +172,7 @@ const Navbar: NextPage = () => {
                             <div className="flex items-center gap-6">
                                 <div className="flex items-center gap-3">
                                     <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer" onClick={() => {
-                                        auth.isAuthenticated && route.push("/writeblog")
+                                        route.push("/writeblog")
                                     }}>Write <NotebookPen size={18} /></button>
                                     <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer">Notification <IoIosNotificationsOutline size={18} /></button>
                                 </div>
