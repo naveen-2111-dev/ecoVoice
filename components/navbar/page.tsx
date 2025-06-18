@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { ChevronRight, Funnel, UserPlus, Menu, X, LucideLogOut, NotebookPen } from "lucide-react";
+import { ChevronRight, Funnel, UserPlus, Menu, X, NotebookPen } from "lucide-react";
 import { VscSignOut } from "react-icons/vsc";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import AuthButton from "./components/Authbutton";
@@ -169,17 +169,17 @@ const Navbar: NextPage = () => {
 
                     <div className="pt-2 space-y-3">
                         {auth.isAuthenticated ? (
-                            <div className="flex items-center gap-6">
+                            <>
                                 <div className="flex items-center gap-3">
                                     <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer" onClick={() => {
                                         route.push("/writeblog")
                                     }}>Write <NotebookPen size={18} /></button>
                                     <button className="flex gap-3 items-center border p-2 rounded-md cursor-pointer">Notification <IoIosNotificationsOutline size={18} /></button>
                                 </div>
-                                <LogoutButton icon={<LucideLogOut />} variant="outline">
+                                <LogoutButton icon={<VscSignOut size={18} />} variant="outline">
                                     Logout
                                 </LogoutButton>
-                            </div>
+                            </>
                         ) : (
                             <>
                                 <AuthButton
