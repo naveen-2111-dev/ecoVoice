@@ -7,9 +7,9 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import { useState } from "react";
-import { FaBold, FaItalic, FaUnderline, FaLink, FaUndo, FaRedo, FaPlus } from "react-icons/fa";
+import { FaBold, FaItalic, FaUnderline, FaLink, FaPlus } from "react-icons/fa";
 
-export default function CleanEditor() {
+export default function ProfessionalEditor() {
     const [title, setTitle] = useState("");
     const [wordCount, setWordCount] = useState(0);
 
@@ -25,18 +25,19 @@ export default function CleanEditor() {
                 allowBase64: true,
             }),
             Placeholder.configure({
-                placeholder: "Start writing your content here...",
+                placeholder: "Tell your story...",
             }),
         ],
         content: "",
         editorProps: {
             attributes: {
-                class: "prose prose-sm max-w-none focus:outline-none min-h-[300px] p-4",
+                class: "prose prose-lg max-w-2xl mx-auto focus:outline-none min-h-[300px] py-6 px-4",
             },
         },
         onUpdate: ({ editor }) => {
             const text = editor.getText();
-            setWordCount(text.split(/\s+/).filter(word => word.length > 0).length);
+            const words = text.trim() ? text.trim().split(/\s+/).filter(word => word.length > 0) : [];
+            setWordCount(words.length);
         },
     });
 
@@ -70,89 +71,66 @@ export default function CleanEditor() {
     };
 
     if (!editor) {
-        return <div className="min-h-[300px] bg-gray-50 rounded-lg flex items-center justify-center">Loading editor...</div>;
+        return <div className="min-h-[300px] flex items-center justify-center">Loading editor...</div>;
     }
 
     return (
-        <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-4">
-            <div className="flex justify-between items-center">
+        <div className="max-w-4xl mx-auto py-8">
+            <div className="flex justify-end mb-2">
                 <div className="text-sm text-gray-500">{wordCount} words</div>
             </div>
 
             <input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Document title"
-                className="w-full text-2xl font-medium focus:outline-none placeholder:text-gray-300 border-b pb-2 mb-2"
+                placeholder="Title"
+                className="w-full text-5xl font-serif font-light focus:outline-none placeholder:text-gray-300 mb-8"
             />
 
-            <div className="border border-gray-200 rounded-lg overflow-hidden">
-                <div className="flex gap-1 p-2 bg-gray-50 border-b">
-                    <ToolbarButton
-                        onClick={() => editor.chain().focus().undo().run()}
-                        disabled={!editor.can().undo()}
-                        title="Undo"
-                    >
-                        <FaUndo />
-                    </ToolbarButton>
-                    <ToolbarButton
-                        onClick={() => editor.chain().focus().redo().run()}
-                        disabled={!editor.can().redo()}
-                        title="Redo"
-                    >
-                        <FaRedo />
-                    </ToolbarButton>
-
-                    <div className="w-px bg-gray-300 mx-1"></div>
-
+            <div className="relative">
+                <div className="absolute -left-20 top-0 flex flex-col gap-1 p-2">
                     <ToolbarButton
                         onClick={() => editor.chain().focus().toggleBold().run()}
                         isActive={editor.isActive("bold")}
                         title="Bold"
                     >
-                        <FaBold />
+                        <FaBold className="text-sm" />
                     </ToolbarButton>
                     <ToolbarButton
                         onClick={() => editor.chain().focus().toggleItalic().run()}
                         isActive={editor.isActive("italic")}
                         title="Italic"
                     >
-                        <FaItalic />
+                        <FaItalic className="text-sm" />
                     </ToolbarButton>
                     <ToolbarButton
                         onClick={() => editor.chain().focus().toggleUnderline().run()}
                         isActive={editor.isActive("underline")}
                         title="Underline"
                     >
-                        <FaUnderline />
+                        <FaUnderline className="text-sm" />
                     </ToolbarButton>
-
-                    <div className="w-px bg-gray-300 mx-1"></div>
-
                     <ToolbarButton
                         onClick={addLink}
                         isActive={editor.isActive("link")}
                         title="Add Link"
                     >
-                        <FaLink />
+                        <FaLink className="text-sm" />
                     </ToolbarButton>
-
-                    <div className="w-px bg-gray-300 mx-1"></div>
-
                     <div className="relative group">
                         <ToolbarButton
                             title="Add Image"
                         >
-                            <FaPlus />
+                            <FaPlus className="text-sm" />
                         </ToolbarButton>
-                        <div className="absolute hidden group-hover:flex flex-col bg-white shadow-lg rounded-md overflow-hidden z-10">
+                        <div className="absolute left-full ml-1 hidden group-hover:flex flex-col bg-white shadow-lg rounded-md overflow-hidden z-10 border border-gray-200">
                             <button
                                 onClick={addImage}
-                                className="px-3 py-2 text-sm text-left hover:bg-gray-100 whitespace-nowrap"
+                                className="px-3 py-2 text-sm text-left hover:bg-gray-50 whitespace-nowrap border-b border-gray-100"
                             >
                                 From URL
                             </button>
-                            <label className="px-3 py-2 text-sm text-left hover:bg-gray-100 cursor-pointer whitespace-nowrap">
+                            <label className="px-3 py-2 text-sm text-left hover:bg-gray-50 cursor-pointer whitespace-nowrap">
                                 Upload Image
                                 <input
                                     type="file"
@@ -188,7 +166,7 @@ function ToolbarButton({
         <button
             onClick={onClick}
             disabled={disabled}
-            className={`p-2 rounded hover:bg-gray-200 transition-colors ${isActive ? "bg-gray-200 text-blue-600" : "text-gray-600"
+            className={`p-2 rounded-full hover:bg-gray-100 transition-colors ${isActive ? "bg-gray-100 text-black" : "text-gray-500"
                 } ${disabled ? "opacity-50 cursor-not-allowed" : ""}`}
             title={title}
         >
